@@ -69,6 +69,10 @@ html {
     max-width: 100%;
     width: 200px;
   }
+
+  .nav-content{
+    display: flex;
+  }
   
   .hero {
     background-image: url('/public/img/bank-tree.jpeg');
@@ -288,5 +292,29 @@ html {
     .transaction-button {
       width: 200px;
     }
+  }
+
+  .form-edit{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 13px;
+  }
+  .form-edit .input{
+    margin-right: 5px;
+    padding: 1px;
+  }
+
+  .input input{
+    padding: 5px;
+  }
+
+  form .cancel{
+    margin-left: 5px;
+    padding: 2px;
+  }
+
+  form .save{
+    margin-left: 2px;
+    padding: 2px;
   }
   

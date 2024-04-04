@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user);
+  // Vérifie si l'utilisateur est défini avant d'accéder à ses propriétés
+  const firstName = user?.firstName;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,16 +27,16 @@ function Header() {
       </Link>
       <div>
         {isAuthenticated ? (
-          <>
-            <div className="main-nav-item" onClick={sign_out}>
+          <div className="nav-content">
+            <Link to={"/"} className="main-nav-item" onClick={sign_out}>
               <i className="fa fa-sign-out"></i>
               Sign Out
-            </div>
-            <div className="main-nav-item">
-              Tony
+            </Link>
+            <Link to={"/profil/"} className="main-nav-item">
+              {firstName}
               <i className="fa fa-user-circle"></i>
-            </div>
-          </>
+            </Link>
+          </div>
         ) : (
           <Link className="main-nav-item" to={"../login/:id"}>
             <i className="fa fa-sign-in"></i>

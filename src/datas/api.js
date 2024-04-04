@@ -1,22 +1,22 @@
-const BASE_URL = "http://localhost:3001/api/v1";
-
-// Fonction pour récupérer les données des utilisateurs depuis l'API
-export async function getUserData() {
+export const updateUserDataApi = async (userId, newData) => {
   try {
-    // Récupérer les données
-    const response = await fetch(`${BASE_URL}/user/signup`);
-    const data = await response.json();
-    console.log("Données de l'utilisateur :", data);
+    // Code pour mettre à jour les données utilisateur dans votre API
+    // Assurez-vous de remplacer cela par votre logique d'API réelle
+    const response = await fetch(`votre-url-api/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newData),
+    });
 
-    if (data) {
-      return data;
-    } else {
-      console.log("Aucune donnée utilisateur trouvée");
-      return null;
+    if (!response.ok) {
+      throw new Error("Failed to update user data");
     }
 
-    // Vous pouvez également utiliser les données récupérées pour afficher ou utiliser
+    const updatedUserData = await response.json();
+    return updatedUserData;
   } catch (error) {
-    console.error("Erreur lors de la récupération des données :", error);
+    throw new Error(`Error updating user data: ${error.message}`);
   }
-}
+};

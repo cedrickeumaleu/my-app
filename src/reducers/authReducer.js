@@ -2,6 +2,7 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   error: null,
+  token: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -11,14 +12,19 @@ const authReducer = (state = initialState, action) => {
       // Si les informations sont valides, met à jour l'état avec l'utilisateur connecté
       return {
         isAuthenticated: true,
-        user: action.payload,
+        token: action.payload.body.token,
         error: null,
+      };
+    case "SET_USER_DATA":
+      return {
+        ...state,
+        user: action.payload.body,
       };
     case "LOGOUT":
       // Déconnectez l'utilisateur
       return {
         isAuthenticated: false,
-        user: null,
+        token: null,
         error: null,
       };
     case "SET_ERROR":

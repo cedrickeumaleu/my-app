@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Importez useHistory pour la redirection
-import { login} from '../actions/authActions';
+import { login, setUserData} from '../actions/authActions';
 
 
 function Login() {
@@ -32,6 +32,24 @@ function Login() {
             console.log('User is authenticated', data);
             
             dispatch(login(data))
+
+            const responseUserData = await fetch('http://localhost:3001/api/v1/user/profile', {
+                
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization":"Bearer " + data.body.token
+            }
+            
+        });
+        
+        if (!responseUserData.ok) {
+            throw new Error('Authentication failed');
+        }
+        
+        // récupération des données de l'utilisateur
+        const dataUser = await responseUserData.json()
+        dispatch(setUserData(dataUser))
             // Rediriger vers la page de profil après la connexion réussie
             navigate('/profil');
         } catch (error) {
